@@ -75,20 +75,18 @@ export default function Switch({
     [styles.borderColorTransition]: !isInVRExperiment,
   });
 
-  const sliderStyles = classnames(
-    styles.slider,
-    switched ? styles.sliderRight : styles.sliderLeft,
-    !disabled ? styles.sliderDark : styles.sliderLight,
-  );
+  const sliderStyles = classnames(styles.slider, {
+    [styles.sliderRight]: switched,
+    [styles.sliderLeft]: !switched,
+    [styles.sliderDark]: !disabled,
+    [styles.sliderLight]: disabled,
+  });
 
-  const sliderVrStyles = classnames(
-    {
-      [styles.sliderVrRight]: switched,
-      [styles.sliderVrLeft]: !switched,
-      [styles.disabledSlider]: disabled && !switched,
-    },
-    sliderStyles,
-  );
+  const sliderVrStyles = classnames(styles.sliderVr, {
+    [styles.sliderVrOn]: switched,
+    [styles.sliderVrOff]: !switched,
+    [styles.disabledSlider]: disabled && !switched,
+  });
 
   const inputStyles = classnames(styles.checkbox, {
     [styles.checkboxEnabled]: !disabled,
